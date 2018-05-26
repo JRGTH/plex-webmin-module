@@ -1,0 +1,23 @@
+index_title=Plex Media Server
+index_econfig=The Plex server rc file $1 was not found on your system. Maybe Plex is not installed, or your <a href='$2'>module configuration</a> is incorrect.
+index_eplex=The Plex server program $1 was not found on your system. Maybe Plex is not installed, or your <a href='$2'>module configuration</a> is incorrect.
+index_return=module index
+index_apply=Apply Changes
+index_applymsg=Click this button to apply the current configuration to the running Plex process.
+index_applymsg2=Click this button to apply the current configuration with the command $1.
+index_start=Start Server
+index_startmsg=Click this button to start Plex Media Server.
+index_stop=Stop Server
+index_restart=Restart Server
+index_restartmsg=Click this button to restart Plex Media Server.
+index_stopmsg=Click this button to stop Plex Media Server.
+index_version=$1
+index_colitem=Plex Monitoring
+index_colinfo=Output Information
+index_plexver=Plex version
+index_plexstat=Plex status
+index_infopid=Running as pid:
+index_dlnastat=DLNA status
+index_modver=Version
+start_err=Failed to start Plex server
+apply_epid=Not running
