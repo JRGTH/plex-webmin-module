@@ -5,3 +5,4 @@ Version       Description
 
 0.20..........Initial Plex Media Server module release.
 0.21..........Added missing bits, and improve configuration options.
+0.22..........Remove redundant version info, and formatting.

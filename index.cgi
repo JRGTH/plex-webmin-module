@@ -37,9 +37,6 @@ $dlnastatus = &get_dlna_stats();
 
 print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}]);
 # Display columns if requested information is available.
-if (!$version == "blank") {
-print ui_columns_row([$text{'index_plexver'}, $version,]);
-	}
 if (!$plexstatus == "blank") {
 print ui_columns_row([$text{'index_plexstat'}, "$text{'index_infopid'} $plexstatus",]);
 	}
