@@ -49,6 +49,8 @@ sub restart_plex
 if ($config{'restart_cmd'}) {
 	local $out = `$config{'restart_cmd'} 2>&1 </dev/null`;
 	return "<pre>$out</pre>" if ($?);
+	# Wait few secs for Plex services to populate.
+	sleep (3);
 	}
 else {
 	# Just kill plex related processes and start Plex.
