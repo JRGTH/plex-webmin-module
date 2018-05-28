@@ -5,6 +5,4 @@ version_cmd=Command for Plex version,0,60
 pid_file=Full path to Plex PID file,3,None,49
 start_cmd=Command to start Plex,0,60
 restart_cmd=Command to restart Plex,0,60
-status_cmd=Command for Plex PID,0,60
-status_dlna=Command for DLNA PID,0,60
 stop_cmd=Command to stop Plex,0,60

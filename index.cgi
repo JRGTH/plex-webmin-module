@@ -23,17 +23,20 @@ if (!&has_command($config{'plex_path'})) {
 	}
 
 # Get Plex version.
-$version = &get_plex_version();
+my $version = &get_plex_version();
 &write_file("$module_config_directory/version", {""},$version);
 &ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
 	&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,
 	&text('index_version', "$text{'index_modver'} $version"));
 
 # Get Plex status.
-$plexstatus = &get_plex_stats();
+my $plexstatus = &get_plex_stats();
 
 # Get DLNA status.
-$dlnastatus = &get_dlna_stats();
+my $dlnastatus = &get_dlna_stats();
+
+# Get Tuner status.
+my $tunerstatus = &get_tuner_stats();
 
 print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}]);
 # Display columns if requested information is available.
@@ -43,7 +46,9 @@ print ui_columns_row([$text{'index_plexstat'}, "$text{'index_infopid'} $plexstat
 if (!$dlnastatus == "blank") {
 print ui_columns_row([$text{'index_dlnastat'}, "$text{'index_infopid'} $dlnastatus",]);
 	}
-
+if (!$tunerstatus == "blank") {
+print ui_columns_row([$text{'index_tunerstat'}, "$text{'index_infopid'} $tunerstatus",]);
+	}
 print ui_columns_end();
 
 # Check if plex is running.

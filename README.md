@@ -4,7 +4,7 @@ Plex Webmin Module
 **Description**
 
 Simple Plex Media Server Webmin module which seamlessly integrates the popular Plex Media Server,
-the module is initially pre configured for FreeBSD, but can be configured for many more distributions
+this module supports FreeBSD, Debian and Ubuntu, but can be configured for many more distributions
 supporting the Plex Media Server, the module allows you to perform basic service control for the
 Plex Media Server Component installed on your system for convenience.
 

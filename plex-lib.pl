@@ -9,61 +9,36 @@ use WebminCore;
 # get_plex_version()
 sub get_plex_version
 {
-$getversion = "$config{'version_cmd'}";
-$version = `$getversion`;
+my $getversion = "$config{'version_cmd'}";
+my $version = `$getversion`;
 }
 
 # get_plex_stats()
 sub get_plex_stats
 {
-$getplexstat = "$config{'status_cmd'}";
-$plexstatus = `$getplexstat`;
+my $getplexstat = 'pgrep "Plex Media"';
+my $plexstatus = `$getplexstat`;
 }
 
 # get_dlna_stats()
 sub get_dlna_stats
 {
-$getdlnastat = "$config{'status_dlna'}";
-$dlnastatus = `$getdlnastat`;
+my $getdlnastat = 'pgrep "Plex DLNA"';
+my $dlnastatus = `$getdlnastat`;
 }
 
-# get_plex_config()
-# Returns a reference to an array of Plex config file options.
-sub get_plex_config
+# get_tuner_stats()
+sub get_tuner_stats
 {
-local @rv = ( { 'dummy' => 1,
-		'indent' => 0,
-		'file' => $config{'plex_config'},
-		'line' => -1,
-		'eline' => -1 } );
-local $lnum = 0;
-open(CONF, $config{'plex_config'});
-while(<CONF>) {
-	s/\r|\n//g;
-	s/^\s*#.*$//g;
-	local ($name, @values) = split(/\s+/, $_);
-	if ($name) {
-		local $dir = { 'name' => $name,
-					'values' => \@values,
-					'file' => $config{'plex_config'},
-					'line' => $lnum };
-		push(@rv, $dir);
-		}
-	$lnum++;
-	}
-close(CONF);
-return \@rv;
+my $gettunerstat = 'pgrep "Plex Tuner"';
+my $tunerstatus = `$gettunerstat`;
 }
 
-# find_value(name, &config)
-sub find_value
+# Kill Plex related processes.
+sub kill_plex_procs
 {
-foreach $c (@{$_[1]}) {
-	if (lc($c->{'name'}) eq lc($_[0])) {
-		return wantarray ? @{$c->{'values'}} : $c->{'values'}->[0];
-		}
-	}
-return wantarray ? ( ) : undef;
+my $getplexprocs = 'pkill "Plex Media" && pkill "Plex DLNA" && pkill "Plex Tuner" && pkill "Plex Script"';
+my $killplexprocs = `$getplexprocs`;
 }
 
 # restart_plex()
@@ -76,15 +51,21 @@ if ($config{'restart_cmd'}) {
 	return "<pre>$out</pre>" if ($?);
 	}
 else {
-	local $pid = &get_plex_pid();
-	$pid || return $text{'apply_epid'};
-	&kill_logged('HUP', $pid);
+	# Just kill plex related processes and start Plex.
+	kill_plex_procs;
+	if ($config{'start_cmd'}) {
+	$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
+	if ($?) { return "<pre>$out</pre>"; }
+	# Wait few secs for Plex services to populate.
+	sleep (3);
+		}
 	}
 return undef;
 }
 
 # stop_plex()
-# Kills the Plex server, and returns an error message on failure or
+# Always use stop command whenever possible, otherwise
+# try to kill the Plex server, returns an error message on failure or
 # undef on success.
 sub stop_plex
 {
@@ -93,9 +74,8 @@ if ($config{'stop_cmd'}) {
 	return "<pre>$out</pre>" if ($?);
 	}
 else {
-	local $pid = &get_plex_pid();
-	$pid || return $text{'apply_epid'};
-	&kill_logged('TERM', $pid);
+	# Just kill Plex related processes.
+	kill_plex_procs;
 	}
 return undef;
 }
@@ -112,6 +92,8 @@ if (-f $config{'pid_file'} && !&check_pid_file($config{'pid_file'})) {
 if ($config{'start_cmd'}) {
 	$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
 	if ($?) { return "<pre>$out</pre>"; }
+	# Wait few secs for Plex services to populate.
+	sleep (3);
 	}
 else {
 	$out = &backquote_logged("$config{'plex_path'} 2>&1 </dev/null");
@@ -124,9 +106,7 @@ return undef;
 # Returns the Plex server PID file.
 sub get_pid_file
 {
-local $conf = &get_plex_config();
-local $pidfile = &find_value("pidfile", $conf);
-$pidfile ||= $config{'pid_file'};
+$pidfile = $config{'pid_file'};
 return $pidfile;
 }
 
@@ -139,7 +119,7 @@ if ($file) {
 	return &check_pid_file($file);
 	}
 else {
-	local ($rv) = &find_byname("plex");
+	local ($rv) = &find_byname("Plex Media");
 	return $rv;
 	}
 }
