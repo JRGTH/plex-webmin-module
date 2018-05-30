@@ -9,3 +9,4 @@ Version       Description
 0.23..........Code optimization and cleanup, support for Debian, Ubuntu.
 0.24..........Added wait for services to populate.
 0.25..........Added status icon and formatting.
+0.26..........Corrected minor cosmetic typo.
