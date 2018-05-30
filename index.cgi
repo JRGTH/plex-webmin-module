@@ -38,16 +38,19 @@ my $dlnastatus = &get_dlna_stats();
 # Get Tuner status.
 my $tunerstatus = &get_tuner_stats();
 
-print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}]);
-# Display columns if requested information is available.
+# Get status icons.
+my $okicon = &get_stat_icons();
+
+print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}, $text{'index_colstat'}]);
+# Display informative column if service is running.
 if (!$plexstatus == "blank") {
-print ui_columns_row([$text{'index_plexstat'}, "$text{'index_infopid'} $plexstatus",]);
+print ui_columns_row([$text{'index_plexstat'}, "$text{'index_infopid'} $plexstatus", "<img src=$okicon>",]);
 	}
 if (!$dlnastatus == "blank") {
-print ui_columns_row([$text{'index_dlnastat'}, "$text{'index_infopid'} $dlnastatus",]);
+print ui_columns_row([$text{'index_dlnastat'}, "$text{'index_infopid'} $dlnastatus", "<img src=$okicon>",]);
 	}
 if (!$tunerstatus == "blank") {
-print ui_columns_row([$text{'index_tunerstat'}, "$text{'index_infopid'} $tunerstatus",]);
+print ui_columns_row([$text{'index_tunerstat'}, "$text{'index_infopid'} $tunerstatus", "<img src=$okicon>",]);
 	}
 print ui_columns_end();
 

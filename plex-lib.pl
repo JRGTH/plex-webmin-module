@@ -34,6 +34,12 @@ my $gettunerstat = 'pgrep "Plex Tuner"';
 my $tunerstatus = `$gettunerstat`;
 }
 
+# get_stat_icons()
+sub get_stat_icons
+{
+my $okicon = "/images/ok.gif";
+}
+
 # Kill Plex related processes.
 sub kill_plex_procs
 {
