@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.31..........Add missing icon for older themes.
 0.30..........Add process id navigation links.
 0.29..........Add plex url and user option.
 0.28..........Shrink configurable options fields.
