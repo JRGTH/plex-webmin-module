@@ -3,12 +3,13 @@
 ===================================
 Version       Description
 
-0.20..........Initial Plex Media Server module release.
-0.21..........Added missing bits, and improve configuration options.
-0.22..........Remove redundant version info, and formatting.
-0.23..........Code optimization and cleanup, support for Debian, Ubuntu.
-0.24..........Added wait for services to populate.
-0.25..........Added status icon and formatting.
-0.26..........Corrected minor cosmetic typo.
-0.27..........Minor wording changes.
+0.29..........Add plex url and user option.
 0.28..........Shrink configurable options fields.
+0.27..........Minor wording changes.
+0.26..........Corrected minor cosmetic typo.
+0.25..........Added status icon and formatting.
+0.24..........Added wait for services to populate.
+0.23..........Code optimization and cleanup, support for Debian, Ubuntu.
+0.22..........Remove redundant version info, and formatting.
+0.21..........Added missing bits, and improve configuration options.
+0.20..........Initial Plex Media Server module release.

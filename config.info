@@ -1,6 +1,7 @@
 line1=Configurable options,11
 plex_path=Full path to Plex program,0
 plex_config=Full path to Plex RC file,0
+plex_url=Plex Media Server URL,0
 version_cmd=Command for Plex version,0
 pid_file=Full path to Plex PID file,3,None,29
 start_cmd=Command to start Plex,0

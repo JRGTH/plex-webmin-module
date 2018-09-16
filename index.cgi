@@ -41,16 +41,30 @@ my $tunerstatus = &get_tuner_stats();
 # Get status icons.
 my $okicon = &get_stat_icons();
 
+# Get local ip address.
+my $ipaddress =  &to_ipaddress(get_system_hostname());
+if (!$config{'plex_url'} == "blank") {
+	# Set the user defined ip.
+	$plexurl = "$config{'plex_url'}";
+	}
+else {
+	# Set the system local ip.
+	$plexurl = "http://$ipaddress:32400/web";
+}
+
 print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}, $text{'index_colstat'}]);
 # Display informative column if service is running.
 if (!$plexstatus == "blank") {
-print ui_columns_row([$text{'index_plexstat'}, "$text{'index_infopid'} $plexstatus", "<img src=$okicon>",]);
+	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_plexstat'}</a>",
+	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $plexstatus</a>", "<img src=$okicon>",]);
 	}
 if (!$dlnastatus == "blank") {
-print ui_columns_row([$text{'index_dlnastat'}, "$text{'index_infopid'} $dlnastatus", "<img src=$okicon>",]);
+	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_dlnastat'}</a>",
+	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $dlnastatus</a>", "<img src=$okicon>",]);
 	}
 if (!$tunerstatus == "blank") {
-print ui_columns_row([$text{'index_tunerstat'}, "$text{'index_infopid'} $tunerstatus", "<img src=$okicon>",]);
+	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_tunerstat'}</a>",
+	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $tunerstatus</a>", "<img src=$okicon>",]);
 	}
 print ui_columns_end();
 
