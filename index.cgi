@@ -56,15 +56,15 @@ print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}, $text{'i
 # Display informative column if service is running.
 if (!$plexstatus == "blank") {
 	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_plexstat'}</a>",
-	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $plexstatus</a>", "<img src=$okicon>",]);
+	"<a href=/proc/edit_proc.cgi?$plexstatus>$text{'index_infopid'} $plexstatus</a>", "<img src=$okicon>",]);
 	}
 if (!$dlnastatus == "blank") {
 	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_dlnastat'}</a>",
-	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $dlnastatus</a>", "<img src=$okicon>",]);
+	"<a href=/proc/edit_proc.cgi?$dlnastatus>$text{'index_infopid'} $dlnastatus</a>", "<img src=$okicon>",]);
 	}
 if (!$tunerstatus == "blank") {
 	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_tunerstat'}</a>",
-	"<a href=/proc/index_tree.cgi>$text{'index_infopid'} $tunerstatus</a>", "<img src=$okicon>",]);
+	"<a href=/proc/edit_proc.cgi?$tunerstatus>$text{'index_infopid'} $tunerstatus</a>", "<img src=$okicon>",]);
 	}
 print ui_columns_end();
 
