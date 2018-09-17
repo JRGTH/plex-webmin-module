@@ -1,6 +1,6 @@
 plex_path=/usr/lib/plexmediaserver/Plex Media Server
 plex_config=/etc/init/plexmediaserver.conf
-version_cmd=aptitude versions plexmediaserver | egrep -o "([0-9]{1,}\.)+[0-9]{1,}" 
+version_cmd=apt version plexmediaserver 
 start_cmd=service plexmediaserver start
 stop_cmd=service plexmediaserver stop
 restart_cmd=service plexmediaserver restart

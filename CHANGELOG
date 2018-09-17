@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.32..........Simple and faster version command.
 0.31..........Add missing icon for older themes.
 0.30..........Add process id navigation links.
 0.29..........Add plex url and user option.
