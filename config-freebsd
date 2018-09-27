@@ -1,6 +1,7 @@
 plex_path=/usr/local/share/plexmediaserver/Plex Media Server
 plex_config=/usr/local/etc/rc.d/plexmediaserver
-version_cmd=pkg info -I plexmediaserver | cut -d'-' -f2 | cut -d' ' -f1 
+plex_url=
+version_cmd=pkg info -I plexmediaserver | cut -d'-' -f2 | cut -d' ' -f1
 pid_file=/var/run/plex/plex.pid
 start_cmd=service plexmediaserver start
 stop_cmd=service plexmediaserver stop

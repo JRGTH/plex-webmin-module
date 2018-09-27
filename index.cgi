@@ -42,7 +42,9 @@ my $tunerstatus = &get_tuner_stats();
 my $okicon = &get_stat_icons();
 
 # Get local ip address.
-my $ipaddress =  &to_ipaddress(get_system_hostname());
+my $ipaddress =  &get_local_ipaddress();
+
+# Configure Plex ip address.
 if (!$config{'plex_url'} == "blank") {
 	# Set the user defined ip.
 	$plexurl = "$config{'plex_url'}";
@@ -73,16 +75,13 @@ $pid = &get_plex_pid();
 print &ui_hr();
 print &ui_buttons_start();
 if ($pid) {
-	# Running .. offer to apply changes and stop.
-	print &ui_buttons_row("stop.cgi",
-				$text{'index_stop'}, $text{'index_stopmsg'});
-	print &ui_buttons_row("restart.cgi",
-				$text{'index_restart'}, $text{'index_restartmsg'});
+	# Running .. offer to restart and stop.
+	print &ui_buttons_row("stop.cgi", $text{'index_stop'}, $text{'index_stopmsg'});
+	print &ui_buttons_row("restart.cgi", $text{'index_restart'}, $text{'index_restartmsg'});
 	}
 else {
 	# Not running .. offer to start.
-	print &ui_buttons_row("start.cgi", $text{'index_start'},
-				$text{'index_startmsg'});
+	print &ui_buttons_row("start.cgi", $text{'index_start'}, $text{'index_startmsg'});
 	}
 print &ui_buttons_end();
 

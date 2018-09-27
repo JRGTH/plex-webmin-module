@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.40..........Config update and support for Gentoo.
 0.34..........Add support for Redhat/CentOS/Fedora.
 0.33..........Use dpkg for Debian/Ubuntu.
 0.32..........Simple and faster version command.

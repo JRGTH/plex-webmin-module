@@ -40,6 +40,12 @@ sub get_stat_icons
 my $okicon = "/images/ok.gif";
 }
 
+# get_local_ipaddress()
+sub get_local_ipaddress
+{
+my $ipaddress = &to_ipaddress(get_system_hostname());
+}
+
 # Kill Plex related processes.
 sub kill_plex_procs
 {

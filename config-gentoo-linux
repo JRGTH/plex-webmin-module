@@ -1,0 +1,8 @@
+plex_path=/usr/sbin/start_pms
+plex_config=/etc/init.d/plex-media-server
+plex_url=
+version_cmd=ls /var/db/pkg/* | grep plex-media-server | cut -d'-' -f4
+pid_file=/var/run/plex-media-server.pid
+start_cmd=/etc/init.d/plex-media-server start
+stop_cmd=/etc/init.d/plex-media-server stop
+restart_cmd=/etc/init.d/plex-media-server restart

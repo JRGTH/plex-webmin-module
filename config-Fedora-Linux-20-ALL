@@ -1,6 +1,8 @@
 plex_path=/usr/lib/plexmediaserver/Plex Media Server
 plex_config=/etc/rc.d/init.d/plexmediaserver
-version_cmd=yum info plexmediaserver | grep Version | cut -d' ' -f7 
+plex_url=
+version_cmd=yum info plexmediaserver | grep Version | cut -d' ' -f7
+pid_file=/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/plexmediaserver.pid
 start_cmd=service plexmediaserver start
 stop_cmd=service plexmediaserver stop
 restart_cmd=service plexmediaserver restart
