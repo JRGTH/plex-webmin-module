@@ -49,7 +49,7 @@ my $ipaddress = &to_ipaddress(get_system_hostname());
 # Kill Plex related processes.
 sub kill_plex_procs
 {
-my $getplexprocs = 'pkill "Plex Media" && pkill "Plex DLNA" && pkill "Plex Tuner" && pkill "Plex Script"';
+my $getplexprocs = 'pkill -U plex';
 my $killplexprocs = `$getplexprocs`;
 }
 

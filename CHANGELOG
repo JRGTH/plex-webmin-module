@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.41..........Terminate processes by uid.
 0.40..........Config update and support for Gentoo.
 0.34..........Add support for Redhat/CentOS/Fedora.
 0.33..........Use dpkg for Debian/Ubuntu.
