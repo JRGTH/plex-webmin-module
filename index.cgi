@@ -8,7 +8,7 @@ require './plex-lib.pl';
 if (!-r $config{'plex_config'}) {
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
 	print &text('index_econfig', "<tt>$config{'plex_config'}</tt>",
-		    "$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
+		"$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
 	&ui_print_footer("/", $text{"index"});
 	exit;
 	}
@@ -17,17 +17,26 @@ if (!-r $config{'plex_config'}) {
 if (!&has_command($config{'plex_path'})) {
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
 	print &text('index_eplex', "<tt>$config{'plex_path'}</tt>",
-		    "$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
+		"$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
 	&ui_print_footer("/", $text{"index"});
 	exit;
 	}
 
 # Get Plex version.
 my $version = &get_plex_version();
-&write_file("$module_config_directory/version", {""},$version);
-&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
-	&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,
-	&text('index_version', "$text{'index_modver'} $version"));
+if (!$config{'version_cmd'} == "blank") {
+	# Display version.
+	&write_file("$module_config_directory/version", {""},$version);
+	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
+		&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,
+		&text('index_version', "$text{'index_modver'} $version"));
+	}
+else {
+	# Don't display version.
+	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
+		&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,
+		&text('index_version', ""));
+}
 
 # Get Plex status.
 my $plexstatus = &get_plex_stats();

@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.42..........Don't display version if empty, useful if jailed.
 0.41..........Terminate processes by uid.
 0.40..........Config update and support for Gentoo.
 0.34..........Add support for Redhat/CentOS/Fedora.
