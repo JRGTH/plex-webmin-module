@@ -63,21 +63,21 @@ else {
 	$plexurl = "http://$ipaddress:32400/web";
 }
 
-print ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}, $text{'index_colstat'}]);
+print &ui_columns_start([$text{'index_colitem'}, $text{'index_colinfo'}, $text{'index_colstat'}]);
 # Display informative column if service is running.
 if (!$plexstatus == "blank") {
-	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_plexstat'}</a>",
+	print &ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_plexstat'}</a>",
 	"<a href=/proc/edit_proc.cgi?$plexstatus>$text{'index_infopid'} $plexstatus</a>", "<img src=$okicon>",]);
 	}
 if (!$dlnastatus == "blank") {
-	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_dlnastat'}</a>",
+	print &ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_dlnastat'}</a>",
 	"<a href=/proc/edit_proc.cgi?$dlnastatus>$text{'index_infopid'} $dlnastatus</a>", "<img src=$okicon>",]);
 	}
 if (!$tunerstatus == "blank") {
-	print ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_tunerstat'}</a>",
+	print &ui_columns_row(["<a href=$plexurl target=_blank>$text{'index_tunerstat'}</a>",
 	"<a href=/proc/edit_proc.cgi?$tunerstatus>$text{'index_infopid'} $tunerstatus</a>", "<img src=$okicon>",]);
 	}
-print ui_columns_end();
+print &ui_columns_end();
 
 # Check if plex is running.
 $pid = &get_plex_pid();
