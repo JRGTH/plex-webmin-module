@@ -11,7 +11,7 @@ if (!-r $config{'plex_config'}) {
 		"$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
 	&ui_print_footer("/", $text{"index"});
 	exit;
-	}
+}
 
 # Check if Plex exists.
 if (!&has_command($config{'plex_path'})) {
@@ -20,7 +20,7 @@ if (!&has_command($config{'plex_path'})) {
 		"$gconfig{'webprefix'}/config.cgi?$module_name"),"<p>\n";
 	&ui_print_footer("/", $text{"index"});
 	exit;
-	}
+}
 
 # Get Plex version.
 my $version = &get_plex_version();
@@ -30,8 +30,7 @@ if (!$config{'version_cmd'} == "blank") {
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
 		&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,
 		&text('index_version', "$text{'index_modver'} $version"));
-	}
-else {
+} else {
 	# Don't display version.
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1, 0,
 		&help_search_link("plexmediaserver", "man", "doc", "google"), undef, undef,

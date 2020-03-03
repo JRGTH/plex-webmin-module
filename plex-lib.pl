@@ -9,48 +9,43 @@ use WebminCore;
 # get_plex_version()
 sub get_plex_version
 {
-my $getversion = "$config{'version_cmd'}";
-my $version = `$getversion`;
+	my $version = &backquote_command("$config{'version_cmd'}");
 }
 
 # get_plex_stats()
 sub get_plex_stats
 {
-my $getplexstat = 'pgrep "Plex Media"';
-my $plexstatus = `$getplexstat`;
+	my $plexstatus = &backquote_command('pgrep "Plex Media"');
 }
 
 # get_dlna_stats()
 sub get_dlna_stats
 {
-my $getdlnastat = 'pgrep "Plex DLNA"';
-my $dlnastatus = `$getdlnastat`;
+	my $dlnastatus = &backquote_command('pgrep "Plex DLNA"');
 }
 
 # get_tuner_stats()
 sub get_tuner_stats
 {
-my $gettunerstat = 'pgrep "Plex Tuner"';
-my $tunerstatus = `$gettunerstat`;
+	my $tunerstatus = &backquote_command('pgrep "Plex Tuner"');
 }
 
 # get_stat_icons()
 sub get_stat_icons
 {
-my $okicon = "/images/ok.gif";
+	my $okicon = "/images/ok.gif";
 }
 
 # get_local_ipaddress()
 sub get_local_ipaddress
 {
-my $ipaddress = &to_ipaddress(get_system_hostname());
+	my $ipaddress = &to_ipaddress(get_system_hostname());
 }
 
 # Kill Plex related processes.
 sub kill_plex_procs
 {
-my $getplexprocs = 'pkill -U plex';
-my $killplexprocs = `$getplexprocs`;
+	my $killplexprocs = &backquote_command('pkill -U plex');
 }
 
 # restart_plex()
@@ -58,23 +53,22 @@ my $killplexprocs = `$getplexprocs`;
 # undef on success.
 sub restart_plex
 {
-if ($config{'restart_cmd'}) {
-	local $out = `$config{'restart_cmd'} 2>&1 </dev/null`;
-	return "<pre>$out</pre>" if ($?);
-	# Wait few secs for Plex services to populate.
-	sleep (3);
-	}
-else {
-	# Just kill plex related processes and start Plex.
-	kill_plex_procs;
-	if ($config{'start_cmd'}) {
-	$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
-	if ($?) { return "<pre>$out</pre>"; }
-	# Wait few secs for Plex services to populate.
-	sleep (3);
+	if ($config{'restart_cmd'}) {
+		local $out = &backquote_command("$config{'restart_cmd'} 2>&1 </dev/null");
+		return "<pre>$out</pre>" if ($?);
+		# Wait few secs for Plex services to populate.
+		sleep (3);
+	} else {
+		# Just kill plex related processes and start Plex.
+		&kill_plex_procs();
+		if ($config{'start_cmd'}) {
+		$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
+		if ($?) { return "<pre>$out</pre>"; }
+			# Wait few secs for Plex services to populate.
+			sleep (3);
 		}
 	}
-return undef;
+	return undef;
 }
 
 # stop_plex()
@@ -83,15 +77,14 @@ return undef;
 # undef on success.
 sub stop_plex
 {
-if ($config{'stop_cmd'}) {
-	local $out = `$config{'stop_cmd'} 2>&1 </dev/null`;
-	return "<pre>$out</pre>" if ($?);
+	if ($config{'stop_cmd'}) {
+		local $out = &backquote_command("$config{'stop_cmd'} 2>&1 </dev/null");
+		return "<pre>$out</pre>" if ($?);
+	} else {
+		# Just kill Plex related processes.
+		&kill_plex_procs();
 	}
-else {
-	# Just kill Plex related processes.
-	kill_plex_procs;
-	}
-return undef;
+	return undef;
 }
 
 # start_plex()
@@ -99,42 +92,41 @@ return undef;
 # message on failure.
 sub start_plex
 {
-# Remove PID file if invalid.
-if (-f $config{'pid_file'} && !&check_pid_file($config{'pid_file'})) {
-	&unlink_file($config{'pid_file'});
+	# Remove PID file if invalid.
+	if (-f $config{'pid_file'} && !&check_pid_file($config{'pid_file'})) {
+		&unlink_file($config{'pid_file'});
 	}
-if ($config{'start_cmd'}) {
-	$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
-	if ($?) { return "<pre>$out</pre>"; }
-	# Wait few secs for Plex services to populate.
-	sleep (3);
+
+	if ($config{'start_cmd'}) {
+		$out = &backquote_logged("$config{'start_cmd'} 2>&1 </dev/null");
+		if ($?) { return "<pre>$out</pre>"; }
+			# Wait few secs for Plex services to populate.
+			sleep (3);
+	} else {
+		$out = &backquote_logged("$config{'plex_path'} 2>&1 </dev/null");
+		if ($?) { return "<pre>$out</pre>"; }
 	}
-else {
-	$out = &backquote_logged("$config{'plex_path'} 2>&1 </dev/null");
-	if ($?) { return "<pre>$out</pre>"; }
-	}
-return undef;
+	return undef;
 }
 
 # get_pid_file()
 # Returns the Plex server PID file.
 sub get_pid_file
 {
-$pidfile = $config{'pid_file'};
-return $pidfile;
+	$pidfile = $config{'pid_file'};
+	return $pidfile;
 }
 
 # get_plex_pid()
 # Returns the PID of the running Plex process.
 sub get_plex_pid
 {
-local $file = &get_pid_file();
-if ($file) {
-	return &check_pid_file($file);
-	}
-else {
-	local ($rv) = &find_byname("Plex Media");
-	return $rv;
+	local $file = &get_pid_file();
+	if ($file) {
+		return &check_pid_file($file);
+	} else {
+		local ($rv) = &find_byname("Plex Media");
+		return $rv;
 	}
 }
 
