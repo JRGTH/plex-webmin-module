@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.45..........Update configuration for Ubuntu.
 0.44..........Code optimizations and cleanup.
 0.43..........Update help file and minor changes.
 0.42..........Don't display version if empty, useful if jailed.

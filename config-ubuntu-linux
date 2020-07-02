@@ -1,5 +1,5 @@
 plex_path=/usr/lib/plexmediaserver/Plex Media Server
-plex_config=/etc/init/plexmediaserver.conf
+plex_config=/lib/systemd/system/plexmediaserver.service
 plex_url=
 version_cmd=dpkg -s plexmediaserver | grep Version | cut -d' ' -f2
 pid_file=/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/plexmediaserver.pid
