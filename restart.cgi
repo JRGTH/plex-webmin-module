@@ -2,7 +2,7 @@
 # restart.cgi
 # Restart the plex daemon
 
-require './plex-lib.pl';
+require './plexmediaserver-lib.pl';
 &ReadParse();
 &error_setup($text{'restart_err'});
 $err = &restart_plex();

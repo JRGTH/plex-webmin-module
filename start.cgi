@@ -2,7 +2,7 @@
 # start.cgi
 # Start the plex daemon
 
-require './plex-lib.pl';
+require './plexmediaserver-lib.pl';
 &ReadParse();
 &error_setup($text{'start_err'});
 $err = &start_plex();

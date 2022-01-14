@@ -2,7 +2,7 @@
 # stop.cgi
 # Stop the plex daemon
 
-require './plex-lib.pl';
+require './plexmediaserver-lib.pl';
 &ReadParse();
 &error_setup($text{'stop_err'});
 $err = &stop_plex();

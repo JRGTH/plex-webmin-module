@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# plex-lib.pl
+# plexmediaserver-lib.pl
 # Common functions for the Plex daemon
 
 BEGIN { push(@INC, ".."); };

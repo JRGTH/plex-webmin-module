@@ -2,7 +2,7 @@
 # index.cgi
 # Display Plex option categories
 
-require './plex-lib.pl';
+require './plexmediaserver-lib.pl';
 
 # Check if config file exists.
 if (!-r $config{'plex_config'}) {
