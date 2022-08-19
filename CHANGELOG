@@ -3,6 +3,7 @@
 ===================================
 Version       Description
 
+0.47..........Rename lib file to fix index error on later Webmin releases.
 0.46..........Update to rename module lib file causing errors on later Webmin releases.
 0.45..........Update configuration for Ubuntu.
 0.44..........Code optimizations and cleanup.
